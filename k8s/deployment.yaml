@@ -15,6 +15,11 @@ spec:
       containers:
       - name: project-k
         image: ghcr.io/randomstar/project-k:main
+        env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
         ports:
         - containerPort: 8001
         resources:

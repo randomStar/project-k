@@ -79,17 +79,14 @@ CMD ["gunicorn", "-b", "0.0.0.0:8001", "app:app"]
 
 This Dockerfile specifies the base image, sets up a working directory, installs the required packages, copies the project files, exposes port 5000, and starts the application using Gunicorn.
 
-### Step 2: Build the Docker Image
+### Step 2: [Option 1] Build and push the Docker Image to a Registry
+
 
 Run the following command in your project's root directory to build the Docker image:
 
 ```sh
 docker build -t project-k .
 ```
-
-Replace `your-image-name` with a suitable name for your Docker image.
-
-### Step 3: [Optional] Push the Docker Image to a Registry
 
 Push the Docker image to a container registry like Docker Hub or Google Container Registry. For example, to push the image to Docker Hub:
 
@@ -110,8 +107,11 @@ docker tag your-image-name your-dockerhub-username/your-image-name
 ```sh
 docker push your-dockerhub-username/your-image-name
 ```
+### Step 2: [Option 2] Build and push with Github Actions
 
-### Step 4: Create a Kubernetes Deployment
+Fork this repo to your personal github account.
+
+### Step 3: Create a Kubernetes Deployment
 
 Create a file named `deployment.yaml` with the following contents:
 
@@ -144,7 +144,7 @@ spec:
 
 Replace `your-dockerhub-username/your-image-name` with the appropriate Docker image name.
 
-### Step 5: Create a Kubernetes Service
+### Step 4: Create a Kubernetes Service
 
 Create a file named `service.yaml` with the following contents:
 
@@ -165,7 +165,7 @@ spec:
 
 This file defines a LoadBalancer service that exposes the Flask app on port 80.
 
-### Step 6: Deploy the Application
+### Step 5: Deploy the Application
 
 Apply the deployment and service configurations using kubectl:
 
@@ -174,7 +174,7 @@ kubectl apply -f flask-deployment.yaml
 kubectl apply -f flask-service.yaml
 ```
 
-### Step 7: Access the Flask API
+### Step 6: Access the Flask API
 
 Get the external IP address of the LoadBalancer service:
 
