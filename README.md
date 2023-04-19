@@ -109,8 +109,7 @@ docker push your-dockerhub-username/your-image-name
 ```
 ### Step 2: [Option 2] Build and push with Github Actions
 
-Fork this repo to your personal github account.
-
+Fork this repo to your personal github account, wait for Github Action passed
 ### Step 3: Create a Kubernetes Deployment
 
 Create a file named `deployment.yaml` with the following contents:
@@ -141,9 +140,16 @@ spec:
             memory: 128Mi
 
 ```
-
-Replace `your-dockerhub-username/your-image-name` with the appropriate Docker image name.
-
+If deployment failed with can not pull image error:
+the following will allow kubenetes pull images from your Github registry.
+```
+kubectl create secret docker-registry ghcr-io \
+    --docker-server=ghcr.io \
+    --docker-username=<GitHub username> \
+    --docker-password=<Personal Access Token> \
+    --docker-email=<GitHub email>
+kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "ghcr-io"}]}'
+```
 ### Step 4: Create a Kubernetes Service
 
 Create a file named `service.yaml` with the following contents:
@@ -170,8 +176,8 @@ This file defines a LoadBalancer service that exposes the Flask app on port 80.
 Apply the deployment and service configurations using kubectl:
 
 ```sh
-kubectl apply -f flask-deployment.yaml
-kubectl apply -f flask-service.yaml
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
 ```
 
 ### Step 6: Access the Flask API

@@ -15,6 +15,7 @@ spec:
       containers:
       - name: project-k
         image: ghcr.io/randomstar/project-k:main
+        imagePullPolicy: Always
         env:
           - name: POD_NAME
             valueFrom:
