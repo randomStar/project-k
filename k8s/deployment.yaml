@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-k-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: project-k
+  template:
+    metadata:
+      labels:
+        app: project-k
+    spec:
+      containers:
+      - name: project-k
+        image: ghcr.io/randomstar/project-k:main
+        ports:
+        - containerPort: 8001
+        resources:
+          limits:
+            cpu: "0.1"
+            memory: 128Mi

@@ -1,0 +1,11 @@
+# Python
+*.pyc
+__pycache__/
+venv/
+env/
+.idea/
+
+# Flask
+instance/
+.build/
+.history/

@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Flask
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+.coverage
+.pytest_cache/
+.coverage.*
