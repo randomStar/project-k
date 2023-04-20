@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cap-sample-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cap-sample
+  template:
+    metadata:
+      labels:
+        app: cap-sample
+    spec:
+      containers:
+      - name: cap-sample
+        image: ghcr.io/randomstar/project-k:cap
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4004
+        resources:
+          limits:
+            cpu: "0.1"
+            memory: 128Mi
