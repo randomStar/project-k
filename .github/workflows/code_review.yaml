@@ -22,6 +22,7 @@ jobs:
         echo "::set-output name=comment::$comment"
     - name: Post comment
       uses: unsplash/comment-on-pr@v1.4.1
-      with:
+      env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
         body: ${{ steps.comment.outputs.comment }}
