@@ -21,7 +21,7 @@ jobs:
         python generate_comment.py ${{ github.event.pull_request.html_url }}
         echo "::set-output name=comment::$comment"
     - name: Post comment
-      uses: unsplash/comment-on-pr@v1.4.1
+      uses: unsplash/comment-on-pr@v1.3.0
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         body: ${{ steps.comment.outputs.comment }}
