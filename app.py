@@ -7,7 +7,7 @@ app = Flask(__name__)
 def hello():
     return f'Hello from pod {os.environ.get("POD_NAME")}!'
     
-@app.route('/hello')
+@app.route('/hello_again')
 def hello_again():
     return f'Hello again from pod {os.environ.get("POD_NAME")}!'
 
