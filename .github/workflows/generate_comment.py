@@ -1,5 +1,6 @@
 import openai
 import os
+import sys
 
 def generate_comment(pr_url):
     openai.api_key = os.environ["OPENAI_API_KEY"]
@@ -19,3 +20,6 @@ def generate_comment(pr_url):
 
     comment = response.choices[0].text.strip()
     return comment
+
+if __name__ == '__main__':
+    generate_comment(sys.argv[1:])
