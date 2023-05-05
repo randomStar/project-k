@@ -1,0 +1,27 @@
+name: Comment on Pull Request
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  generate-comment:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: pip install openai
+    - name: Generate comment
+      id: comment
+      run: |
+        python generate_comment.py ${{ github.event.pull_request.html_url }}
+        echo "::set-output name=comment::$comment"
+    - name: Post comment
+      uses: unsplash/comment-on-pr@v1.4.1
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        body: ${{ steps.comment.outputs.comment }}
