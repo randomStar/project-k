@@ -25,4 +25,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       uses: unsplash/comment-on-pr@v1.3.0
       with:
-        body: ${{ steps.comment.outputs.comment }}
+        msg: ${{ steps.comment.outputs.comment }}
