@@ -18,7 +18,7 @@ jobs:
     - name: Generate comment
       id: comment
       run: |
-        python generate_comment.py ${{ github.event.pull_request.html_url }}
+        python .github/workflows/generate_comment.py ${{ github.event.pull_request.html_url }}
         echo "::set-output name=comment::$comment"
     - name: Post comment
       uses: unsplash/comment-on-pr@v1.4.1
