@@ -1,11 +1,8 @@
 import openai
 import os
-import requests
 
 def generate_comment():
-    pr_patch = requests.get(os.environ["GITHUB_EVENT_PULL_PATCH_URL"])
-    content = pr_patch.text
-
+    content = os.environ["GITHUB_STATE"]["PATCH_CONTENT"]
     openai.api_key = os.environ["OPENAI_API_KEY"]
     model_engine = "gpt-3.5-turbo"
     prompt = (f"Please act as a code reviewer and review the changes made in the following patch format pull request: {content}. ")
