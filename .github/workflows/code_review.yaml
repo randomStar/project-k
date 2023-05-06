@@ -26,7 +26,7 @@ jobs:
         PR_BRANCH=${{ github.event.pull_request.head.sha }}
         BASE_BRANCH=${{ github.event.pull_request.base.sha }}
         diff_content=$(git diff --no-prefix $BASE_BRANCH $PR_BRANCH)
-        output=$(PATCH_CONTENT=`$diff_content` python .github/workflows/generate_comment.py)
+        output=$(PATCH_CONTENT=$diff_content python .github/workflows/generate_comment.py)
         echo "OPEN_AI_COMMENT=$output" >> $GITHUB_OUTPUT
     - name: Post comment
       env:
