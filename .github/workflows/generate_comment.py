@@ -1,11 +1,9 @@
 import openai
 import os
 import sys
-import requests
 
-def generate_comment(pr_url):
-    pr_patch = requests.get(f"{pr_url}.patch")
-    content = pr_patch.text
+def generate_comment():
+    content = os.environ["PR_CONTENT"]
     openai.api_key = os.environ["OPENAI_API_KEY"]
 
     model_engine = "gpt-3.5-turbo"
