@@ -15,7 +15,7 @@ jobs:
       with:
         python-version: '3.x'
     - name: Install dependencies
-      run: pip install openai
+      run: pip install openai requests
     - name: Generate comment
       id: comment
       env:
