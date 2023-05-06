@@ -13,11 +13,12 @@ jobs:
       with:
         fetch-depth: 2
     - name: Get PR patch content
+      id: get-pr-patch
       run: |
-        PR_BRANCH=${{ github.event.pull_request.head.sha }}
-        BASE_BRANCH=${{ github.event.pull_request.base.sha }}
+        PR_BRANCH=${{ github.event.pull_request.head.ref }}
+        BASE_BRANCH=${{ github.event.pull_request.base.ref }}
         content=$(git diff --no-prefix $BASE_BRANCH $PR_BRANCH)
-        echo "PATCH_CONTENT=content" >> $GITHUB_STATE
+        echo "PATCH_CONTENT=content" >> $GITHUB_OUTPUT
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -28,6 +29,7 @@ jobs:
       id: comment
       env:
         OPENAI_API_KEY: '${{ secrets.OPENAI_API_KEY }}'
+        PATCH_CONTENT: ${{ steps.get-pr-patch.outputs.PATCH_CONTENT }}
       run: |
         output=$(python .github/workflows/generate_comment.py)
         echo "OPEN_AI_COMMENT=$output" >> $GITHUB_OUTPUT
