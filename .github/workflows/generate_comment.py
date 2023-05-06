@@ -10,12 +10,12 @@ def generate_comment(pr_url):
               "What is good about this pull request? What needs improvement?")
 
     response = openai.ChatCompletion.create(
-        engine=model_engine,
-        prompt=prompt,
+        model=model_engine,
+        messages=prompt,
         max_tokens=150,
         n=1,
         stop=None,
-        temperature=0.5,
+        temperature=1,
     )
 
     comment = response.choices[0].message.content
