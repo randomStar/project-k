@@ -1,7 +1,6 @@
 import openai
 import os
 import sys
-import logging
 
 def generate_comment(pr_url):
     openai.api_key = os.environ["OPENAI_API_KEY"]
@@ -20,7 +19,7 @@ def generate_comment(pr_url):
     )
 
     comment = response.choices[0].message.content
-    logging.info(f"comment by openai: {comment}")
+    print(f"comment by openai: {comment}")
     return comment
 
 if __name__ == '__main__':
