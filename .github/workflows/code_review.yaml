@@ -15,8 +15,8 @@ jobs:
     - name: Get PR patch content
       id: get-pr-patch
       run: |
-        PR_BRANCH=${{ github.event.pull_request.head.ref }}
-        BASE_BRANCH=${{ github.event.pull_request.base.ref }}
+        PR_BRANCH=${{ github.event.pull_request.head.sha }}
+        BASE_BRANCH=${{ github.event.pull_request.base.sha }}
         content=$(git diff --no-prefix $BASE_BRANCH $PR_BRANCH)
         echo "PATCH_CONTENT=content" >> $GITHUB_OUTPUT
     - name: Set up Python
