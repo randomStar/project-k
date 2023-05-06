@@ -18,7 +18,7 @@ jobs:
         PR_BRANCH=${{ github.event.pull_request.head.sha }}
         BASE_BRANCH=${{ github.event.pull_request.base.sha }}
         content=$(git diff --no-prefix $BASE_BRANCH $PR_BRANCH)
-        echo "PATCH_CONTENT=content" >> $GITHUB_OUTPUT
+        echo "PATCH_CONTENT=$content" >> $GITHUB_OUTPUT
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
