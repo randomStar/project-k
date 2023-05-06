@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        ref: ${{ github.event.pull_request.base.ref }}
+        fetch-depth: 2
     - name: Get PR patch content
       run: |
         PR_BRANCH=${{ github.event.pull_request.head.ref }}
