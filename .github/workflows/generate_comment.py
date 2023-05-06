@@ -9,7 +9,7 @@ def generate_comment(pr_url):
     prompt = (f"Please review the changes made in this pull request: {pr_url}. "
               "What is good about this pull request? What needs improvement?")
 
-    response = openai.Completion.create(
+    response = openai.ChatCompletion.create(
         engine=model_engine,
         prompt=prompt,
         max_tokens=150,
@@ -18,7 +18,7 @@ def generate_comment(pr_url):
         temperature=0.5,
     )
 
-    comment = response.choices[0].text.strip()
+    comment = response.choices[0].message.content
     return comment
 
 if __name__ == '__main__':
