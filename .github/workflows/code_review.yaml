@@ -34,6 +34,7 @@ jobs:
     - name: Post comment
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      uses: unsplash/comment-on-pr@v1.3.0
+      uses: thollander/actions-comment-pull-request@v2
       with:
-        msg: ${{ steps.comment.outputs.OPEN_AI_COMMENT }}
+        message: |
+          ${{ steps.comment.outputs.OPEN_AI_COMMENT }}
