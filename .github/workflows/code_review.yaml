@@ -10,6 +10,12 @@ jobs:
     environment: OpenAI
     steps:
     - uses: actions/checkout@v2
+    - name: Get PR patch content
+      run: |
+        PR_BRANCH=${{ github.event.pull_request.head.ref }}
+        BASE_BRANCH=${{ github.event.pull_request.base.ref }}
+        content=$(git diff --no-prefix $BASE_BRANCH $PR_BRANCH)
+        echo "PATCH_CONTENT=content" >> $GITHUB_STATE
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -22,10 +28,10 @@ jobs:
         OPENAI_API_KEY: '${{ secrets.OPENAI_API_KEY }}'
       run: |
         output=$(python .github/workflows/generate_comment.py)
-        echo "::set-output name=comment::$output"
+        echo "OPEN_AI_COMMENT=$output" >> $GITHUB_OUTPUT
     - name: Post comment
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       uses: unsplash/comment-on-pr@v1.3.0
       with:
-        msg: ${{ steps.comment.outputs.comment }}
+        msg: ${{ steps.comment.outputs.OPEN_AI_COMMENT }}
