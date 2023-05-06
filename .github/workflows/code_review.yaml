@@ -1,4 +1,4 @@
-name: Comment on Pull Request
+name: Code Review
 
 on:
   pull_request:
