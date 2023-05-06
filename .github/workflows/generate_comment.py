@@ -8,10 +8,10 @@ def generate_comment(pr_url):
     model_engine = "gpt-3.5-turbo"
     prompt = (f"Please review the changes made in this pull request: {pr_url}. "
               "What is good about this pull request? What needs improvement?")
-
+    messages=[{"role": "user", "content": prompt}]
     response = openai.ChatCompletion.create(
         model=model_engine,
-        messages=prompt,
+        messages=messages,
         max_tokens=150,
         n=1,
         stop=None,
