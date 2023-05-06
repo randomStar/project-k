@@ -1,4 +1,4 @@
-name: Comment on Pull Request
+name: Code Review
 
 on:
   pull_request:
@@ -7,21 +7,30 @@ on:
 jobs:
   generate-comment:
     runs-on: ubuntu-latest
+    environment: OpenAI
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
     - name: Install dependencies
-      run: pip install openai
+      run: pip install openai requests
     - name: Generate comment
       id: comment
+      env:
+        OPENAI_API_KEY: '${{ secrets.OPENAI_API_KEY }}'
       run: |
-        python generate_comment.py ${{ github.event.pull_request.html_url }}
-        echo "::set-output name=comment::$comment"
+        PR_BRANCH=${{ github.event.pull_request.head.sha }}
+        BASE_BRANCH=${{ github.event.pull_request.base.sha }}
+        diff_content=$(git diff --no-prefix $BASE_BRANCH $PR_BRANCH)
+        output=$(PATCH_CONTENT=`$diff_content` python .github/workflows/generate_comment.py)
+        echo "OPEN_AI_COMMENT=$output" >> $GITHUB_OUTPUT
     - name: Post comment
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       uses: unsplash/comment-on-pr@v1.3.0
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        body: ${{ steps.comment.outputs.comment }}
+        msg: ${{ steps.comment.outputs.OPEN_AI_COMMENT }}
