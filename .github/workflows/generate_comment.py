@@ -23,4 +23,4 @@ def generate_comment():
     return comment
 
 if __name__ == '__main__':
-    generate_comment(sys.argv[1:])
+    generate_comment()
