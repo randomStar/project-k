@@ -20,9 +20,8 @@ jobs:
       id: comment
       env:
         OPENAI_API_KEY: '${{ secrets.OPENAI_API_KEY }}'
-        PR_CONTENT: ${{ github.event.pull_request.body }}
       run: |
-        output=$(python .github/workflows/generate_comment.py )
+        output=$(python .github/workflows/generate_comment.py)
         echo "::set-output name=comment::$output"
     - name: Post comment
       env:
