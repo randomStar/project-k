@@ -17,3 +17,7 @@ build/
 .coverage
 .pytest_cache/
 .coverage.*
+
+#Git
+.git
+.github
