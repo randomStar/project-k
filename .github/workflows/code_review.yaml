@@ -21,7 +21,7 @@ jobs:
     - name: Generate comment
       id: comment
       env:
-        OPENAI_API_KEY: '${{ secrets.OPENAI_API_KEY }}'
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: |
         PR_BRANCH=${{ github.event.pull_request.head.sha }}
         BASE_BRANCH=${{ github.event.pull_request.base.sha }}
