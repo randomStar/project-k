@@ -25,4 +25,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_REPOSITORY: ${{ github.repository }}
         PR_NUMBER: ${{github.event.number}}
-      run: python .github/workflow/review_pr.py
+      run: python .github/workflows/review_pr.py
