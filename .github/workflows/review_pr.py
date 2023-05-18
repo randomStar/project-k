@@ -3,13 +3,13 @@ import os
 import openai
 
 def call_open_ai(patch):
-    openai.api_key = os.environ["OPENAI_API_KEY"]
-    openai.endpoint = os.environ["OPENAI_API_ENDPOINT"]
-    openai.api_type = os.environ["OPENAI_API_TYPE"]
-    openai.api_version = os.environ["OPENAI_API_VERSION"]
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+    openai.endpoint = os.getenv("OPENAI_API_ENDPOINT")
+    openai.api_type = os.getenv("OPENAI_API_TYPE")
+    openai.api_version = os.getenv("OPENAI_API_VERSION")
 
     response = openai.ChatCompletion.create(
-        engine=os.environ["AZURE_MODEL"], # engine = "deployment_name".
+        engine=os.getenv("AZURE_MODEL"), # engine = "deployment_name".
         max_tokens=2048,
         n=1,
         stop=None,
