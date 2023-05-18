@@ -3,7 +3,6 @@ import os
 import openai
 
 def call_open_ai(patch):
-    print()
     openai.api_key = os.environ["OPENAI_API_KEY"]
     openai.endpoint = os.environ["OPENAI_API_ENDPOINT"]
     openai.api_type = os.environ["OPENAI_API_TYPE"]
@@ -23,7 +22,6 @@ def call_open_ai(patch):
     return response.choices[0].message.content
 
 def review_changes():
-    print(os.environ)
     g = Github(os.environ["GITHUB_TOKEN"])
     repo = g.get_repo(os.environ["GITHUB_REPOSITORY"]) 
     pr = repo.get_pull(int(os.environ["PR_NUMBER"])) 
