@@ -2,13 +2,12 @@ from github import Github
 import os
 import openai
 
-
-openai.api_key = os.environ["OPENAI_API_KEY"]
-openai.endpoint = os.environ["OPENAI_API_ENDPOINT"]
-openai.api_type = os.environ["OPENAI_API_TYPE"]
-openai.api_version = os.environ["OPENAI_API_VERSION"]
-
 def call_open_ai(patch):
+    openai.api_key = os.environ["OPENAI_API_KEY"]
+    openai.endpoint = os.environ["OPENAI_API_ENDPOINT"]
+    openai.api_type = os.environ["OPENAI_API_TYPE"]
+    openai.api_version = os.environ["OPENAI_API_VERSION"]
+
     response = openai.ChatCompletion.create(
         engine="gpt-35-turbo", # engine = "deployment_name".
         max_tokens=2048,
