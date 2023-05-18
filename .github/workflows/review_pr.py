@@ -9,7 +9,7 @@ def call_open_ai(patch):
     openai.api_version = os.environ["OPENAI_API_VERSION"]
 
     response = openai.ChatCompletion.create(
-        engine="gpt-4-8k-0314", # engine = "deployment_name".
+        engine=os.environ["AZURE_MODEL"], # engine = "deployment_name".
         max_tokens=2048,
         n=1,
         stop=None,
