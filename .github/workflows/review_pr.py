@@ -10,7 +10,7 @@ openai.api_version = os.environ["OPENAI_API_VERSION"]
 
 def call_open_ai(patch):
     response = openai.ChatCompletion.create(
-        model="gpt-35-turbo-0301", # engine = "deployment_name".
+        engine="gpt-35-turbo-0301", # engine = "deployment_name".
         max_tokens=2048,
         n=1,
         stop=None,
