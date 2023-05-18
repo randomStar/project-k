@@ -4,7 +4,8 @@ import openai
 
 
 openai.api_key = os.environ["OPENAI_API_KEY"]
-openai.endpoint = os.environ["OPENAI_API_ENDPOINT"]
+# openai.endpoint = os.environ["OPENAI_API_ENDPOINT"]
+openai.endpoint = "https://chatgpt-app-innovation-workshop.openai.azure.com"
 openai.api_type = "azure"
 openai.api_version = "2023-03-15-preview"
 
