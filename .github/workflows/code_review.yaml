@@ -18,25 +18,10 @@ jobs:
       run: pip install openai PyGithub
     - name: Review changes
       env:
-<<<<<<< HEAD
         OPENAI_API_KEY: '${{ secrets.OPENAI_API_KEY }}'
         OPENAI_API_TYPE: '${{ secrets.OPENAI_API_TYPE }}'
         OPENAI_API_ENDPOINT: '${{ secrets.OPENAI_API_ENDPOINT }}'
         OPENAI_API_VERSION: '${{ secrets.OPENAI_API_VERSION }}'
-=======
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      run: |
-        PR_BRANCH=${{ github.event.pull_request.head.sha }}
-        BASE_BRANCH=${{ github.event.pull_request.base.sha }}
-        diff_content=$(git diff --no-prefix $BASE_BRANCH $PR_BRANCH)
-        output=$(PATCH_CONTENT=$diff_content python .github/workflows/generate_comment.py)
-        output="${output//'%'/'%25'}"
-        output="${output//$'\n'/'%0A'}"
-        output="${output//$'\r'/'%0D'}"
-        echo "OPEN_AI_COMMENT=$output" >> $GITHUB_OUTPUT
-    - name: Post comment
-      env:
->>>>>>> origin/main
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_REPOSITORY: ${{ github.repository }}
         PR_NUMBER: ${{github.event.number}}
