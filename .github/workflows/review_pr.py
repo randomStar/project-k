@@ -25,7 +25,7 @@ def call_open_ai(patch):
 def review_changes():
     g = Github(os.environ["GITHUB_TOKEN"])
     repo = g.get_repo(os.environ["GITHUB_REPOSITORY"]) 
-    pr = repo.get_pull(os.environ["PR_NUMBER"]) 
+    pr = repo.get_pull(int(os.environ["PR_NUMBER"])) 
     files = pr.get_files()
     last_commit = pr.get_commits().reversed[0]
     for file in files:
