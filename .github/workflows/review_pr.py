@@ -5,8 +5,8 @@ import openai
 
 openai.api_key = os.environ["OPENAI_API_KEY"]
 openai.endpoint = os.environ["OPENAI_API_ENDPOINT"]
-openai.api_type = os.environ["OPENAI_API_TYPE"]
-openai.api_version =os.environ["OPENAI_API_VERSION"]
+openai.api_type = "azure"
+openai.api_version = "2023-03-15-preview"
 
 def call_open_ai(patch):
     response = openai.ChatCompletion.create(
