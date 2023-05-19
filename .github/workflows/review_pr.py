@@ -15,10 +15,9 @@ def call_open_ai(patch):
         stop=None,
         temperature=0,
         messages=[
-            {"role": "system", "content": "Please play the role of a code reviewer and provide a 10-point score for the code modification, \
-             followed by a brief review. Please follow the following principles: : \
-              1. Be kind. 2. Explain your reasoning. 3. Balance giving explicit directions with just pointing out problems and letting the developer decide. \
-             4. Encourage developers to simplify code or add code comments instead of just explaining the complexity to you."},
+            {"role": "system", "content": "Please act as a code reviewer and review code in three steps: \
+              1. Give an overall score for the current modification according to a 10-point scale; \
+             2. Provide a brief explanation for the score; 3. Suggest what the author should do next."},
             {"role": "user", "content": f"Please review the following code patch: {patch}"}
         ]
     )
