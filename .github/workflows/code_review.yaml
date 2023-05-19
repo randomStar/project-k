@@ -2,11 +2,12 @@ name: Code Review
 
 on:
   pull_request:
-    types: [opened, edited, synchronize]
+    types: [review_requested]
 
 jobs:
   generate-comment:
     runs-on: ubuntu-latest
+    if: github.event.requested_reviewer.login == 'github-actions[bot]'
     environment: OpenAI
     steps:
     - uses: actions/checkout@v3
