@@ -15,8 +15,10 @@ def call_open_ai(patch):
         stop=None,
         temperature=0,
         messages=[
-            {"role": "system", "content": "You are a code reviewer."},
-            {"role": "user", "content": f"Please do a simple review on the following code patch: {patch}"}
+            {"role": "system", "content": "Please act as a code reviewer and review code in three steps: \
+              1. Give an overall score for the current modification according to a 10-point scale; \
+             2. Provide a brief explanation for the score; 3. Suggest what the author should do next."},
+            {"role": "user", "content": f"Please review the following code patch: {patch}"}
         ]
     )
     return response.choices[0].message.content
