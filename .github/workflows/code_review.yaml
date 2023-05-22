@@ -28,3 +28,7 @@ jobs:
         GITHUB_REPOSITORY: ${{ github.repository }}
         PR_NUMBER: ${{github.event.number}}
       run: python .github/workflows/review_pr.py
+    - name: Skip job if condition not met
+      if: ${{ false }}
+      run: |
+        echo "Job skipped: assignee: ${{ github.event.pull_request.assignee.login }} not equal ${{ github.event.pull_request.user.login }}"
