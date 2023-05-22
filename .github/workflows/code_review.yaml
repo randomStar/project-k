@@ -7,7 +7,6 @@ on:
 jobs:
   generate-comment:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.assignee.login == github.event.pull_request.user.login
     environment: OpenAI
     steps:
     - uses: actions/checkout@v3
